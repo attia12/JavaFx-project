@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="526.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interface1.gui.Interface_donnController">
+   <children>
+      <TabPane prefHeight="558.0" prefWidth="923.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane fx:id="txtDate" minHeight="0.0" minWidth="0.0" prefHeight="540.0" prefWidth="926.0">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="58.0" prefWidth="1036.0" style="-fx-background-color: #87CEFA; -fx-background-color: #00BFFF;">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Don" wrappingWidth="311.673828125">
+                                 <font>
+                                    <Font name="System Bold Italic" size="31.0" />
+                                 </font>
+                              </Text>
+                           </children></HBox>
+                        <Button fx:id="btnUpdate" layoutX="331.0" layoutY="416.0" mnemonicParsing="false" onAction="#Uapdate_Don" stylesheets="@tableau.css" text="Update" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding></Button>
+                        <Button fx:id="btnDelete" layoutX="433.0" layoutY="416.0" mnemonicParsing="false" onAction="#Delete_Don" stylesheets="@tableau.css" text="Delete" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding></Button>
+                        <Button fx:id="btnAdd" layoutX="529.0" layoutY="416.0" mnemonicParsing="false" onAction="#Add_Don" stylesheets="@tableau.css" text="ADD" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding></Button>
+                        <TableView fx:id="table" layoutX="280.0" layoutY="130.0" prefHeight="197.0" prefWidth="580.0" style="-fx-background-color: #00BFFF; -fx-border-color: #000000;">
+                           <columns>
+                              <TableColumn fx:id="Id_BenC" prefWidth="57.60003662109375" text="Id_Ben" />
+                              <TableColumn fx:id="TitreC" prefWidth="61.5999755859375" text="Titre" />
+                              <TableColumn fx:id="QteC" prefWidth="68.0" text="Qte" />
+                              <TableColumn fx:id="TypeC" prefWidth="84.0" text="Type" />
+                              <TableColumn fx:id="DateC" prefWidth="74.4000244140625" text="Date" />
+                              <TableColumn fx:id="Id_localC" prefWidth="74.4000244140625" text="Id_local" />
+                              <TableColumn fx:id="Id_cat_idC" prefWidth="62.39996337890625" text="Id_cat_id" />
+                              <TableColumn fx:id="ImageC" prefWidth="92.800048828125" text="Image" />
+                           </columns>
+                        </TableView>
+                        <Pane layoutY="58.0" prefHeight="476.0" prefWidth="248.0" style="-fx-background-color: #383e3c;">
+                           <children>
+                              <TextField fx:id="txtId_Ben" layoutX="28.0" layoutY="24.0" promptText="Id_Ben" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></TextField>
+                              <TextField fx:id="txtTitre" layoutX="27.0" layoutY="82.0" promptText="Titre" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></TextField>
+                              <TextField fx:id="txtQte" layoutX="27.0" layoutY="138.0" promptText="Qte" style="-fx-border-color: #00BFFF;" styleClass="column-header" stylesheets="@tableau.css">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></TextField>
+                              <TextField fx:id="txtType" layoutX="28.0" layoutY="191.0" promptText="Type" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></TextField>
+                              <TextField fx:id="txtId_local" layoutX="27.0" layoutY="239.0" promptText="Id_local" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></TextField>
+                              <ComboBox fx:id="txtId_cat_id" layoutX="18.0" layoutY="292.0" prefHeight="41.0" prefWidth="190.0" promptText="Id_cat_id" style="-fx-border-color: #00BFFF;">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></ComboBox>
+                              <Button fx:id="txtImge" layoutX="39.0" layoutY="414.0" mnemonicParsing="false" onAction="#AddImage" prefHeight="25.0" prefWidth="147.0" stylesheets="@tableau.css" text="ChoisirImage">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></Button>
+                              <DatePicker fx:id="txtDatee" layoutY="352.0" prefHeight="39.0" prefWidth="225.0" promptText="Date" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                                 </padding></DatePicker>
+                           </children>
+                        </Pane>
+                        <ImageView fx:id="img" fitHeight="185.0" fitWidth="212.0" layoutX="711.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextField fx:id="searchBar" layoutX="437.0" layoutY="70.0" onKeyReleased="#searchDon" prefHeight="30.0" prefWidth="215.0" promptText="rechrche" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css" />
+                        <Button fx:id="btnStat" layoutX="613.0" layoutY="416.0" mnemonicParsing="false" onAction="#Stat" stylesheets="@tableau.css" text="Stat" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="513.0" prefWidth="822.0">
+                           <children>
+                              <Pane layoutX="1.0" layoutY="56.0" prefHeight="460.0" prefWidth="230.0" style="-fx-background-color: #383e3c;">
+                                 <children>
+                                    <TextField fx:id="txtNom1" layoutX="26.0" layoutY="40.0" promptText="Nom" stylesheets="@tableau.css" />
+                                    <TextField fx:id="txtType1" layoutX="26.0" layoutY="101.0" promptText="Type_Cat" stylesheets="@tableau.css" />
+                                    <TextField fx:id="txtDes1" layoutX="26.0" layoutY="162.0" promptText="Des_Cat" stylesheets="@tableau.css" />
+                                 </children>
+                              </Pane>
+                              <Button fx:id="btnAdd1" layoutX="512.0" layoutY="382.0" mnemonicParsing="false" onAction="#Add_cat" stylesheets="@tableau.css" text="Add" />
+                              <TableView fx:id="table1" layoutX="301.0" layoutY="61.0" prefHeight="203.0" prefWidth="436.0" stylesheets="@tableau.css">
+                                 <columns>
+                                    <TableColumn fx:id="Type_CatColmn" minWidth="-Infinity" prefWidth="132.79998779296875" text="Type_Cat" />
+                                    <TableColumn fx:id="Des_CatColmn" minWidth="-Infinity" prefWidth="128.00006103515625" text="Des_Cat" />
+                                    <TableColumn fx:id="NomColmn" minWidth="-Infinity" prefWidth="174.40008544921875" text="Nom" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="btnUpdate1" layoutX="557.0" layoutY="382.0" mnemonicParsing="false" onAction="#Update_cat" stylesheets="@tableau.css" text="Update" />
+                              <Button fx:id="btnDelete1" layoutX="428.0" layoutY="382.0" mnemonicParsing="false" onAction="#Delete_cat" stylesheets="@tableau.css" text="Delete" />
+                              <HBox alignment="TOP_CENTER" layoutX="1.0" prefHeight="58.0" prefWidth="1036.0" style="-fx-background-color: #87CEFA; -fx-background-color: #00BFFF;">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categorie" wrappingWidth="311.673828125">
+                                       <font>
+                                          <Font name="System Bold Italic" size="31.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
