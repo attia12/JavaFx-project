@@ -372,7 +372,7 @@ if(file.exists()) {
                 Categorie C = new Categorie(nom,type_cat,type_des);
                 
               boolean check,check2,check3;  
-                if (C.getNom().matches(".*\\d+.*")==true||!Character.isUpperCase(C.getNom().charAt(0)))
+                if (C.getNom().matches(".*\\d+.*")==true||!Character.isUpperCase(C.getNom().charAt(0))||C.getNom().isEmpty())
     {check=false;
 Alert alert = new Alert(AlertType.INFORMATION);
 alert.setTitle("Alerte");
@@ -381,7 +381,7 @@ alert.setContentText("Fomrat Nom");
 alert.showAndWait();}
 else check=true;
                 
- if (C.getType_cat().matches(".*\\d+.*")==true||!Character.isUpperCase(C.getType_cat().charAt(0)))
+ if (C.getType_cat().matches(".*\\d+.*")==true||!Character.isUpperCase(C.getType_cat().charAt(0))||C.getType_cat().isEmpty())
 {check2=false;
 Alert alert = new Alert(AlertType.INFORMATION);
 alert.setTitle("Alerte");
@@ -391,12 +391,12 @@ alert.showAndWait();}
  
 else check2=true;
                
- if (C.getDes_cat().matches(".*\\d+.*")==true||!Character.isUpperCase(C.getDes_cat().charAt(0)))
+ if (C.getDes_cat().matches(".*\\d+.*")==true||!Character.isUpperCase(C.getDes_cat().charAt(0))||C.getDes_cat().isEmpty())
 {check3=false;
 Alert alert = new Alert(AlertType.INFORMATION);
 alert.setTitle("Alerte");
 alert.setHeaderText(null);
-alert.setContentText("Fomrat Titre");
+alert.setContentText("Fomrat Des_cat");
 alert.showAndWait();}
 else check3=true;
                 if (check==true&&check2==true&&check3==true)         
