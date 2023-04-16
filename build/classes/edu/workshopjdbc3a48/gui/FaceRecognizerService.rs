@@ -1,0 +1,2 @@
+application.FaceRecognizerService
+application.FaceRecognizerService$1
