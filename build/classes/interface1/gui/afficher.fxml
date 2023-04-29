@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +15,7 @@
    <children>
       <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="58.0" prefWidth="1036.0" style="-fx-background-color: #87CEFA; -fx-background-color: #00BFFF;">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="   Ajouter Don" wrappingWidth="311.673828125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="   Affichage Don" wrappingWidth="311.673828125">
                <font>
                   <Font name="System Bold Italic" size="31.0" />
                </font>
@@ -25,21 +24,10 @@
       </HBox>
       <Pane layoutX="97.0" layoutY="80.0" prefHeight="418.0" prefWidth="811.0" style="-fx-border-color: #00BFFF;">
          <children>
-            <TableView fx:id="table" layoutX="14.0" layoutY="74.0" prefHeight="245.0" prefWidth="580.0" style="-fx-background-color: #00BFFF; -fx-border-color: #000000;">
-               <columns>
-                  <TableColumn fx:id="Id_BenC" prefWidth="57.60003662109375" text="Id_Ben" />
-                  <TableColumn fx:id="TitreC" prefWidth="61.5999755859375" text="Titre" />
-                  <TableColumn fx:id="QteC" prefWidth="68.0" text="Qte" />
-                  <TableColumn fx:id="TypeC" prefWidth="84.0" text="Type" />
-                  <TableColumn fx:id="DateC" prefWidth="74.4000244140625" text="Date" />
-                  <TableColumn fx:id="Id_localC" prefWidth="74.4000244140625" text="Id_local" />
-                  <TableColumn fx:id="Id_cat_idC" prefWidth="62.39996337890625" text="Id_cat_id" />
-                  <TableColumn fx:id="ImageC" prefWidth="92.800048828125" text="Image" />
-               </columns>
-            </TableView>
             <ImageView fx:id="img" fitHeight="145.0" fitWidth="212.0" layoutX="599.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true" />
             <TextField fx:id="searchBar" layoutX="235.0" layoutY="27.0" onKeyReleased="#searchDon" prefHeight="30.0" prefWidth="215.0" promptText="rechrche" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css" />
             <Button fx:id="btnajouter" layoutX="672.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajouter" stylesheets="@tableau.css" text="Ajouter" />
+            <ListView fx:id="listView" layoutX="81.0" layoutY="66.0" prefHeight="309.0" prefWidth="524.0" />
          </children>
       </Pane>
       <Label layoutX="76.0" layoutY="531.0" prefHeight="31.0" prefWidth="77.0" text="Sa7etna.tn">
@@ -97,5 +85,10 @@
             <Font size="10.0" />
          </font>
       </Label>
+      <Button fx:id="btnback" layoutX="35.0" layoutY="80.0" mnemonicParsing="false" onAction="#back" text="X">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

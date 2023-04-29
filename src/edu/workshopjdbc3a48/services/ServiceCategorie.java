@@ -5,7 +5,7 @@
 package edu.workshopjdbc3a48.services;
 
 import edu.workshopjdbc3a48.entities.Categorie;
-import edu.workshopjdbc3a48.entities.Personne;
+
 import edu.workshopjdbc3a48.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -136,4 +136,6 @@ alert.showAndWait();
 System.out.print(cat);
         return cat;
     }
+  
+  
 }

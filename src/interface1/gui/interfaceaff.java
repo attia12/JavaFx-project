@@ -25,10 +25,10 @@ public class interfaceaff extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try{
-          Parent root = FXMLLoader.load(getClass().getResource("afficher.fxml"));
+          Parent root = FXMLLoader.load(getClass().getResource("ChatServer.fxml"));
         Scene scene = new Scene(root);
         
-        primaryStage.setTitle("Don");
+        primaryStage.setTitle("service");
         primaryStage.setScene(scene);
         primaryStage.show();
         }catch (IOException ex)

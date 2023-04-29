@@ -25,10 +25,13 @@ public class interfaceajout extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try{
-          Parent root = FXMLLoader.load(getClass().getResource("ajout.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("arduino.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("chatClien.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("DetailController.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("Affichage_Ann.fxml"));
         Scene scene = new Scene(root);
         
-        primaryStage.setTitle("Don");
+        primaryStage.setTitle("clien");
         primaryStage.setScene(scene);
         primaryStage.show();
         }catch (IOException ex)

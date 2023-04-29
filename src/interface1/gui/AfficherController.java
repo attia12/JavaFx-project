@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -24,7 +26,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -33,6 +37,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -42,98 +48,77 @@ import javafx.scene.input.MouseEvent;
 public class AfficherController implements Initializable {
 
     @FXML
-    private TableView<Don> table;
+    private Button btnajouter;
     @FXML
-    private TableColumn<Don,String> Id_BenC;
+    private Button btnback;
     @FXML
-    private TableColumn<Don,String > TitreC;
-    @FXML
-    private TableColumn<Don,String> QteC;
-    @FXML
-    private TableColumn<Don,String> TypeC;
-    @FXML
-    private TableColumn<Don,String> DateC;
-    @FXML
-    private TableColumn<Don,String> Id_localC;
-    @FXML
-    private TableColumn<Don,String> Id_cat_idC;
-    @FXML
-    private TableColumn<Don,String> ImageC;
+    private ListView<Don> listView;
     @FXML
     private ImageView img;
     @FXML
     private TextField searchBar;
-    @FXML
-    private Button btnajouter;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       table();
-    }    
- public void affimage(String s){
-        
-       File file = new File(s);
-if(file.exists()) {
-    Image image = new Image(file.toURI().toString());
-    img.setImage(image);
-} else {
-    System.out.println("Image file not found!");
-}
+        listView();
     }
-public void table() {
+
+    public void affimage(String s) {
+        File file = new File(s);
+        if (file.exists()) {
+            Image image = new Image(file.toURI().toString());
+            img.setImage(image);
+        } else {
+            System.out.println("Image file not found!");
+        }
+    }
+
+  public void listView() {
     ObservableList<Don> dons = FXCollections.observableArrayList();
     ServiceDon serviceDon = new ServiceDon();
     dons.addAll(serviceDon.getAll());
+    
+        
+    listView.setItems(dons);
 
-    table.setItems(dons);
-
-    Id_BenC.setCellValueFactory(f -> new SimpleIntegerProperty(f.getValue().getId_ben()).asString());
-    TitreC.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getTitre()));
-    QteC.setCellValueFactory(f -> new SimpleIntegerProperty(f.getValue().getQte()).asString());
-    TypeC.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getType()));
-    DateC.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getDate()));
-    Id_localC.setCellValueFactory(f -> new SimpleIntegerProperty(f.getValue().getId_local()).asString());
-    Id_cat_idC.setCellValueFactory(f -> new SimpleIntegerProperty(f.getValue().getId_cat_id()).asString());
-    ImageC.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getImge()));
-
-    table.setRowFactory(tv -> {
-        TableRow<Don> myRow = new TableRow<>();
-        myRow.setOnMouseClicked((MouseEvent event) -> {
-            if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
-                int myIndex = table.getSelectionModel().getSelectedIndex();
-                
-                String imge = table.getItems().get(myIndex).getImge();
-                affimage(imge);
-               
-      
-              
-            }
-        });
-        return myRow;
+    listView.setOnMouseClicked((MouseEvent event) -> {
+        Don selectedDon = listView.getSelectionModel().getSelectedItem();
+        String imge = selectedDon.getImge();
+        affimage(imge);
     });
-    
-    
 }
+
+    
+
     @FXML
     private void searchDon(KeyEvent event) {
-String searchText = searchBar.getText().trim();
-    ServiceDon sp = new ServiceDon();
-    ObservableList<Don> list = FXCollections.observableArrayList();
-    List<Don> results = sp.searchByTitre(searchText);
-    list.addAll(results);
-    table.setItems(list);
+        String searchText = searchBar.getText().trim();
+        ServiceDon sp = new ServiceDon();
+        ObservableList<String> list = FXCollections.observableArrayList();
+        List<Don> results = sp.searchByTitre(searchText);
+        for (Don don : results) {
+            list.add(don.getTitre());
+        }
+        listView.setItems(list);
     }
 
     @FXML
     private void ajouter(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("afficher.fxml"));
-        javafx.scene.Scene scene = new javafx.scene.Scene(root);
-        
-       
-        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ajout.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
-    
+
+    @FXML
+    private void back(ActionEvent event) {
+        Stage stage = (Stage) btnback.getScene().getWindow();
+        stage.close();
+    }
+
 }

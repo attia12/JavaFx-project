@@ -18,7 +18,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="526.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interface1.gui.Interface_donnController">
    <children>
-      <TabPane prefHeight="558.0" prefWidth="923.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="1.0" layoutY="7.0" prefHeight="698.0" prefWidth="951.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Untitled Tab 1">
             <content>
@@ -32,37 +32,34 @@
                                  </font>
                               </Text>
                            </children></HBox>
-                        <Button fx:id="btnUpdate" layoutX="331.0" layoutY="416.0" mnemonicParsing="false" onAction="#Uapdate_Don" stylesheets="@tableau.css" text="Update" textAlignment="CENTER">
+                        <Button fx:id="btnUpdate" layoutX="373.0" layoutY="423.0" mnemonicParsing="false" onAction="#Uapdate_Don" stylesheets="@tableau.css" text="Update" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                            <padding>
                               <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                            </padding></Button>
-                        <Button fx:id="btnDelete" layoutX="433.0" layoutY="416.0" mnemonicParsing="false" onAction="#Delete_Don" stylesheets="@tableau.css" text="Delete" textAlignment="CENTER">
+                        <Button fx:id="btnDelete" layoutX="475.0" layoutY="423.0" mnemonicParsing="false" onAction="#Delete_Don" stylesheets="@tableau.css" text="Delete" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                            <padding>
                               <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                            </padding></Button>
-                        <Button fx:id="btnAdd" layoutX="529.0" layoutY="416.0" mnemonicParsing="false" onAction="#Add_Don" stylesheets="@tableau.css" text="ADD" textAlignment="CENTER">
+                        <Button fx:id="btnAdd" layoutX="571.0" layoutY="423.0" mnemonicParsing="false" onAction="#Add_Don" stylesheets="@tableau.css" text="ADD" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                            <padding>
                               <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                            </padding></Button>
-                        <TableView fx:id="table" layoutX="280.0" layoutY="130.0" prefHeight="197.0" prefWidth="580.0" style="-fx-background-color: #00BFFF; -fx-border-color: #000000;">
+                        <TableView fx:id="table" layoutX="260.0" layoutY="123.0" prefHeight="226.0" prefWidth="617.0" style="-fx-background-color: #00BFFF; -fx-border-color: #000000;">
                            <columns>
-                              <TableColumn fx:id="Id_BenC" prefWidth="57.60003662109375" text="Id_Ben" />
-                              <TableColumn fx:id="TitreC" prefWidth="61.5999755859375" text="Titre" />
-                              <TableColumn fx:id="QteC" prefWidth="68.0" text="Qte" />
-                              <TableColumn fx:id="TypeC" prefWidth="84.0" text="Type" />
-                              <TableColumn fx:id="DateC" prefWidth="74.4000244140625" text="Date" />
-                              <TableColumn fx:id="Id_localC" prefWidth="74.4000244140625" text="Id_local" />
-                              <TableColumn fx:id="Id_cat_idC" prefWidth="62.39996337890625" text="Id_cat_id" />
-                              <TableColumn fx:id="ImageC" prefWidth="92.800048828125" text="Image" />
+                              <TableColumn fx:id="TitreC" prefWidth="100.7999267578125" text="Titre" />
+                              <TableColumn fx:id="QteC" prefWidth="113.5999755859375" text="Qte" />
+                              <TableColumn fx:id="TypeC" prefWidth="127.20001220703125" text="Type" />
+                              <TableColumn fx:id="DateC" prefWidth="116.0" text="Date" />
+                              <TableColumn fx:id="ImageC" prefWidth="160.00006103515625" text="Image" />
                            </columns>
                         </TableView>
                         <Pane layoutY="58.0" prefHeight="476.0" prefWidth="248.0" style="-fx-background-color: #383e3c;">
@@ -101,9 +98,80 @@
                                  </padding></DatePicker>
                            </children>
                         </Pane>
-                        <ImageView fx:id="img" fitHeight="185.0" fitWidth="212.0" layoutX="711.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img" fitHeight="204.0" fitWidth="205.0" layoutX="740.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true" />
                         <TextField fx:id="searchBar" layoutX="437.0" layoutY="70.0" onKeyReleased="#searchDon" prefHeight="30.0" prefWidth="215.0" promptText="rechrche" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css" />
-                        <Button fx:id="btnStat" layoutX="613.0" layoutY="416.0" mnemonicParsing="false" onAction="#Stat" stylesheets="@tableau.css" text="Stat" textAlignment="CENTER">
+                        <Button fx:id="btnStat" layoutX="655.0" layoutY="423.0" mnemonicParsing="false" onAction="#Stat" stylesheets="@tableau.css" text="Stat" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="btnBack" layoutX="860.0" layoutY="70.0" mnemonicParsing="false" onAction="#Back" text="X">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="QR" layoutX="661.0" layoutY="529.0" mnemonicParsing="false" onAction="#QR_press" stylesheets="@tableau.css" text="QR" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <TextField fx:id="qr_text" layoutX="432.0" layoutY="526.0" promptText="Qr_code" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                           <padding>
+                              <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                           </padding>
+                        </TextField>
+                        <Button fx:id="excel" layoutX="326.0" layoutY="517.0" mnemonicParsing="false" onAction="#excel_press" stylesheets="@tableau.css" text="excel" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <TextField fx:id="txtcombine" layoutX="438.0" layoutY="579.0" promptText="txtImge" style="-fx-border-color: #00BFFF;" stylesheets="@tableau.css">
+                           <padding>
+                              <Insets bottom="10.0" left="20.0" right="20.0" top="4.0" />
+                           </padding>
+                        </TextField>
+                        <Button fx:id="combine" layoutX="326.0" layoutY="577.0" mnemonicParsing="false" onAction="#combin_press" stylesheets="@tableau.css" text="combine" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="cod_bar" layoutX="669.0" layoutY="579.0" mnemonicParsing="false" onAction="#codbar_press" stylesheets="@tableau.css" text="QR" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="facebook" layoutX="320.0" layoutY="371.0" mnemonicParsing="false" onAction="#facebook_press" stylesheets="@tableau.css" text="facebook" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="email" layoutX="748.0" layoutY="378.0" mnemonicParsing="false" onAction="#email_press" stylesheets="@tableau.css" text="email" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="email1" layoutX="791.0" layoutY="454.0" mnemonicParsing="false" onAction="#pdf_press" stylesheets="@tableau.css" text="pdf" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
@@ -149,6 +217,14 @@
                               </HBox>
                            </children>
                         </Pane>
+                        <Button fx:id="excelCat" layoutX="305.0" layoutY="526.0" mnemonicParsing="false" onAction="#excel_press" stylesheets="@tableau.css" text="excel" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                           </padding>
+                        </Button>
                      </children></AnchorPane>
             </content>
           </Tab>
