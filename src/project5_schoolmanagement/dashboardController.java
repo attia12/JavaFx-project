@@ -49,10 +49,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import edu.esparit.services.EmailService;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.SwingFXUtils;
@@ -1228,6 +1231,12 @@ private static final String TO_PHONE_NUMBER = "+21653587130";
                 alert.showAndWait();
                 showResponseRecord();
                 clearResponse();
+            try {
+                EmailService.sendEmail(reclamations.getEmail(), "bonjour"+reclamations.getNom(),"votre reclamation a été bien examiner");
+                System.out.println("Email sent successfully!");
+            } catch (MessagingException ex) {
+                Logger.getLogger(dashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 
                  
          
