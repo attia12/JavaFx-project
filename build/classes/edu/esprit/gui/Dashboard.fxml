@@ -103,7 +103,7 @@
             <AnchorPane fx:id="total_student_card" layoutX="42.0" layoutY="169.0" prefHeight="159.0" prefWidth="288.0" styleClass="card-dashboard1" stylesheets="@dashboardDesign.css">
                <children>
                   <FontAwesomeIcon fill="#34457c" glyphName="USERS" layoutX="167.0" layoutY="113.0" opacity="0.72" size="8em" />
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="204.0" text="Total " textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="254.0" text="Total  Reclamation" textFill="WHITE">
                      <font>
                         <Font name="Microsoft Sans Serif" size="30.0" />
                      </font>
@@ -118,7 +118,7 @@
             <AnchorPane fx:id="total_enrolled_card" layoutX="42.0" layoutY="350.0" prefHeight="159.0" prefWidth="288.0" styleClass="card-dashboard2" stylesheets="@dashboardDesign.css">
                <children>
                   <FontAwesomeIcon fill="#2b684c" glyphName="USER_PLUS" layoutX="167.0" layoutY="113.0" opacity="0.72" size="8em" />
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="204.0" text="Total " textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="242.0" text="Total  En Cour" textFill="WHITE">
                      <font>
                         <Font name="Microsoft Sans Serif" size="30.0" />
                      </font>
@@ -133,7 +133,7 @@
             <AnchorPane fx:id="total_graduated_card" layoutX="369.0" layoutY="169.0" prefHeight="159.0" prefWidth="288.0" styleClass="card-dashboard3" stylesheets="@dashboardDesign.css">
                <children>
                   <FontAwesomeIcon fill="#5b2565" glyphName="GRADUATION_CAP" layoutX="153.0" layoutY="113.0" opacity="0.72" size="8em" />
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="233.0" text="Total " textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="254.0" text="Total  Responded" textFill="WHITE">
                      <font>
                         <Font name="Microsoft Sans Serif" size="30.0" />
                      </font>

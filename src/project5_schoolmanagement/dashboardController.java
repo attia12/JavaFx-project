@@ -5,6 +5,16 @@
  */
 package project5_schoolmanagement;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfWriter;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import edu.esparit.services.ReclamationC;
 import edu.esparit.services.ResponseC;
@@ -49,8 +59,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+
 import edu.esparit.services.EmailService;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
@@ -84,6 +97,7 @@ import static org.bouncycastle.asn1.iana.IANAObjectIdentifiers.mail;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 /**
  * FXML Controller class
  *
@@ -333,45 +347,7 @@ private static final String TO_PHONE_NUMBER = "+21653587130";
         
       
     }*/
-     public void showChart(){
-         
-         
-         /*try {
-            String req = "SELECT count(nom),description FROM reclamation where status=0";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while(rs.next()){
-                Integer count = Integer.parseInt(rs.getString("count(nom)"));
-                
-               
-                chart.getData().add(new XYChart.Data<>(count, rs.getString("description")));
-                
-                
-               
-            
-            
-            }
-            if(line_chart_page.isVisible()){
-                
-                lineChart.getData().add(chart);
-                
-            }else if(bar_chart_page.isVisible()){
-                
-                barChart.getData().add(chart);
-                
-            }else if(area_chart_page.isVisible()){
-                
-                areaChart.getData().add(chart);
-                
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }*/
      
-     
-     
-     
-     }
      public void totalGraduated(){
        
     
@@ -1022,48 +998,66 @@ private static final String TO_PHONE_NUMBER = "+21653587130";
     
 
     @FXML
-    private void print(ActionEvent event) {
-         FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Save PDF");
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
-    File file = fileChooser.showSaveDialog(new Stage());
-
-    if (file != null) {
-        try {
-            // Create a new PDF document
-            PDDocument document = new PDDocument();
-            PDPage page = new PDPage(PDRectangle.A4);
-            document.addPage(page);
-
-            // Create a PDPageContentStream to write content to the PDF
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-
-            // Get a snapshot of the TableView as an image
-           
-            TableView<Reclamation> tableView = table_view; // Replace "yourTableView" with your actual TableView variable
-            
-            WritableImage snapshot = tableView.snapshot(new SnapshotParameters(), null);
-
-            // Convert the image to a BufferedImage
-            java.awt.image.BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
-
-            // Write the image to the PDF
-           /* PDRectangle pageSize = page.getMediaBox();
-            float scale = Math.min(pageSize.getWidth() / image.getWidth(), pageSize.getHeight() / image.getHeight());
-            float x = (pageSize.getWidth() - image.getWidth() * scale) / 2;
-            float y = (pageSize.getHeight() - image.getHeight() * scale) / 2;
-            contentStream.drawImage(SwingFXUtils.fromFXImage(snapshot, null), x, y, image.getWidth() * scale, image.getHeight() * scale);*/
-
-            // Close the content stream and save the PDF document
-            contentStream.close();
-            document.save(file);
-
-            // Close the PDF document
-            document.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void print(ActionEvent event) throws DocumentException {
+         Reclamation selectedReclamation = table_view.getSelectionModel().getSelectedItem(); // Récupérer la catégorie sélectionnée dans la TableView
+        if (selectedReclamation == null) {
+            // Aucune catégorie sélectionnée, afficher un message d'erreur
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Aucune catégorie sélectionnée");
+            alert.setContentText("Veuillez sélectionner une Véhicule dans la liste.");
+            alert.showAndWait();
+            return;
         }
-    }
+
+        Document document = new Document();
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\attia\\OneDrive\\Bureau\\Nouveau dossier (8)\\ListeReclamation.pdf"));
+            document.open();
+            Font font = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+
+            // Créer un Chunk pour le texte "Réclamation" en rouge
+            Chunk chunk = new Chunk("Réclamation", FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLD, BaseColor.RED));
+
+            // Créer un objet Phrase qui contient le Chunk
+            Phrase phrase = new Phrase(chunk);
+
+            // Ajouter le Phrase à un Paragraph
+            Paragraph titre = new Paragraph(phrase);
+            titre.setAlignment(Element.ALIGN_CENTER);
+            titre.setSpacingAfter(50);
+            document.add(titre);
+
+            Paragraph nom = new Paragraph("Nom : " + selectedReclamation.getNom());
+            nom.setSpacingAfter(25);
+            document.add(nom);
+
+            Paragraph prenom = new Paragraph("Prénom : " + selectedReclamation.getPrenom());
+            prenom.setSpacingAfter(25);
+            document.add(prenom);
+
+            Paragraph email = new Paragraph("Email : " + selectedReclamation.getEmail());
+            email.setSpacingAfter(25);
+            document.add(email);
+
+            
+
+            Paragraph description = new Paragraph("Description : " + selectedReclamation.getDescription());
+            description.setSpacingAfter(25);
+            document.add(description);
+
+           
+
+           
+
+        } catch (FileNotFoundException | DocumentException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the document
+            document.close();
+        }
+        
         
         
     }
@@ -1149,8 +1143,9 @@ private static final String TO_PHONE_NUMBER = "+21653587130";
     @FXML
     private void showChart(ActionEvent event) {
         XYChart.Series<Integer, Integer> chart = new XYChart.Series<>();
-    chart.getData().add(new XYChart.Data<>(10, 1));  // Use a number value instead of a string
+    chart.getData().add(new XYChart.Data<>(10, 8));  // Use a number value instead of a string
     chart.getData().add(new XYChart.Data<>(5, 2));   // Use a number value instead of a string
+    
      if(line_chart_page.isVisible()){
                 
                 lineChart.getData().add(chart);
