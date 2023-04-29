@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,17 @@ public class GestionReclam {
            return match.matches();
     
     }
+    public static List<String> inappropriateWords = Arrays.asList("badword1", "badword2", "badword3");
+ public static String filterInput(String input) {
+    String filteredInput = input;
+    for (String word : inappropriateWords) {
+        String regex = "(?i)\\b" + Pattern.quote(word) + "\\b";
+        filteredInput = filteredInput.replaceAll(regex, "*****");
+    }
+    return filteredInput;
+}
+   
+   
     
     
     
@@ -46,7 +58,7 @@ public class GestionReclam {
             // TODO code application logic here
             // MyConnection mc=new MyConnection();
             // ReclamationC rc=new ReclamationC();
-            Reclamation r=new Reclamation(69,"nihed","attia","attia@gmail.com","nicenice");
+           // Reclamation r=new Reclamation(69,"nihed","attia","attia@gmail.com","nicenice");
            /* System.out.println(r.toString());*/
            
             
@@ -58,10 +70,10 @@ public class GestionReclam {
             //Response re=new Response(22,"mohamedyassine",r);
             //res.modifier(re);
            
-           String input = "47566";
-boolean isValid = validateInput(input);
-        System.out.println(isValid);
-        System.out.println(!isValid);
+           //String input = "47566";
+//boolean isValid = validateInput(input);
+       // System.out.println(isValid);
+       // System.out.println(!isValid);
            
       
             //res.ajouter(re);
@@ -75,6 +87,11 @@ boolean isValid = validateInput(input);
             
            // System.out.println(res.getTbyId(20));
            //rc.modifier(r);
+           String userInput = "badword1";
+            System.out.println(userInput);
+String filteredInput = filterInput(userInput);
+        System.out.println(filteredInput);
+
             
           
           

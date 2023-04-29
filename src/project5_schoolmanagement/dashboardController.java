@@ -10,7 +10,13 @@ import edu.esparit.services.ReclamationC;
 import edu.esparit.services.ResponseC;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.Response;
+import edu.esprit.utils.MyConnection;
+import static java.lang.System.console;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,13 +46,56 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Properties;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.bouncycastle.pqc.math.linearalgebra.Matrix;
+import javax.mail.Session;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.internet.MimeMessage;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import static org.bouncycastle.asn1.iana.IANAObjectIdentifiers.mail;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 /**
  * FXML Controller class
  *
  * @author attia
  */
 public class dashboardController implements Initializable {
+    private static final String ACCOUNT_SID ="AC8f3d4e9f79cf0bd67b0a93b93b1f36d2";
+private static final String AUTH_TOKEN ="7436fc40c029938495136dd6569cf834";
+private static final String FROM_PHONE_NUMBER = "+12707138326";
+private static final String TO_PHONE_NUMBER = "+21653587130";
+
+/*private static final String SMTP_HOST = "your_smtp_host";
+    private static final int SMTP_PORT = 587; // Replace with the appropriate SMTP port
+    private static final String USERNAME = "attia1232020@gmail.com"; // Replace with your email address
+    private static final String PASSWORD = "essattia00"; // Replace with your email password*/
 
     @FXML
     private AnchorPane navbar;
@@ -133,17 +182,17 @@ public class dashboardController implements Initializable {
     @FXML
     private AnchorPane line_chart_page;
     @FXML
-    private LineChart<?, ?> lineChart;
+    private LineChart<Integer, Integer> lineChart;
     @FXML
     private Button show_Chart_Button;
     @FXML
     private AnchorPane bar_chart_page;
     @FXML
-    private BarChart<?, ?> barChart;
+    private BarChart<Integer, Integer> barChart;
     @FXML
     private AnchorPane area_chart_page;
     @FXML
-    private AreaChart<?, ?> areaChart;
+    private AreaChart<Integer, Integer> areaChart;
     @FXML
     private AnchorPane nav_chart;
     @FXML
@@ -162,6 +211,15 @@ public class dashboardController implements Initializable {
     private Button deleteresponse;
     @FXML
     private Button sr_update11;
+    
+    @FXML
+    private TextField filterfield;
+    
+    public Connection cnx=MyConnection.getInstance().getCnx() ;
+    public  List<String> inappropriateWords = Arrays.asList("badword1", "badword2", "badword3");
+    
+    //observalble list to store data
+   
 
     /**
      * Initializes the controller class.
@@ -226,6 +284,167 @@ public class dashboardController implements Initializable {
         
           
         
+    }
+     
+     /*public static void sendEmail(String recipient) {
+         System.out.println("sending email...");
+         Properties properties=new Properties();
+         properties.put("mail.smtp.auth", "true");
+          properties.put("mail.smtp.starttls.enable", "true");
+           properties.put("mail.smtp.host", "smtp.gmail.com");
+            properties.put("mail.smtp.port", "587");
+            final String MyaccountGmail="attia1232020@gmail.com";
+            final String Password="essattia00";
+            Session session=Session.getInstance(properties,new Authenticator() {
+                protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                
+                return new javax.mail.PasswordAuthentication(MyaccountGmail,Password);
+                }
+});
+         
+        // Set the SMTP server properties
+        //send email message
+        try {
+            // Create a new message
+            MimeMessage message = new MimeMessage(session);
+
+            // Set the sender address
+            message.setFrom(new InternetAddress("sender@example.com")); // replace with your email address
+
+            // Set the recipient address
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("recipient@example.com")); // replace with recipient's email address
+
+            // Set the subject of the message
+            message.setSubject("Hello from JavaMail");
+
+            // Set the content of the message
+            message.setText("This is a test email sent from JavaMail.");
+
+            // Send the message
+            Transport.send(message);
+
+            System.out.println("Email sent successfully!");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        
+      
+    }*/
+     public void showChart(){
+         
+         
+         /*try {
+            String req = "SELECT count(nom),description FROM reclamation where status=0";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                Integer count = Integer.parseInt(rs.getString("count(nom)"));
+                
+               
+                chart.getData().add(new XYChart.Data<>(count, rs.getString("description")));
+                
+                
+               
+            
+            
+            }
+            if(line_chart_page.isVisible()){
+                
+                lineChart.getData().add(chart);
+                
+            }else if(bar_chart_page.isVisible()){
+                
+                barChart.getData().add(chart);
+                
+            }else if(area_chart_page.isVisible()){
+                
+                areaChart.getData().add(chart);
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }*/
+     
+     
+     
+     
+     }
+     public void totalGraduated(){
+       
+    
+     try {
+            String req = "SELECT count(nom) FROM reclamation WHERE status = 1";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                
+                String totalGraduated = rs.getString("count(nom)");
+                
+                
+                total_graduated.setText(totalGraduated);
+            
+            
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+     
+    }
+     
+     
+     public  String filterInput(String input) {
+    String filteredInput = input;
+    for (String word : inappropriateWords) {
+        String regex = "(?i)\\b" + Pattern.quote(word) + "\\b";
+        filteredInput = filteredInput.replaceAll(regex, "*****");
+    }
+    return filteredInput;
+}
+     
+      
+      
+     
+     public void totalStudent(){
+       
+    
+     try {
+            String req = "SELECT count(nom) FROM reclamation";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                
+                String totalStudent = rs.getString("count(nom)");
+                
+                
+                total_student.setText(totalStudent);
+            
+            
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+     
+    }
+     public void totalEnrolled(){
+       
+    
+     try {
+            String req = "SELECT count(nom) FROM reclamation where status=0";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                
+                String totalEnrolled = rs.getString("count(nom)");
+                
+                
+                total_enrolled.setText(totalEnrolled);
+            
+            
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+     
     }
     public void navButton(){
         
@@ -358,6 +577,54 @@ public class dashboardController implements Initializable {
                     + "-fx-border-width:0px 0px 0px 5px");
         
     }
+    public void search(){
+        ReclamationC rc=new ReclamationC();
+        
+        List<Reclamation> show = rc.getAll();
+        ObservableList<Reclamation> observableShow = FXCollections.observableArrayList(show);
+        FilteredList<Reclamation> filteredData = new FilteredList<>(observableShow, b -> true);
+        filterfield.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(reclamation -> {
+				// If filter text is empty, display all persons.
+								
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				
+				// Compare first name and last name of every person with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (reclamation.getNom().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
+					return true; // Filter matches first name.
+				} else if (reclamation.getPrenom().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches last name.
+				}
+                                else if (reclamation.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches last name.
+				}
+                                else if (reclamation.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches last name.
+				}
+				else if (String.valueOf(reclamation.getStatus()).indexOf(lowerCaseFilter)!=-1)
+				     return true;
+				     else  
+				    	 return false; // Does not match.
+			});
+		});
+		
+		// 3. Wrap the FilteredList in a SortedList. 
+		SortedList<Reclamation> sortedData = new SortedList<>(filteredData);
+		
+		// 4. Bind the SortedList comparator to the TableView comparator.
+		// 	  Otherwise, sorting the TableView would have no effect.
+		sortedData.comparatorProperty().bind(table_view.comparatorProperty());
+		
+		// 5. Add sorted (and filtered) data to the table.
+		table_view.setItems(sortedData);
+        
+        
+        
+    }
     @FXML
     public void exit(){
         
@@ -367,8 +634,13 @@ public class dashboardController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        totalStudent();
+        
+        totalGraduated();
+        totalEnrolled();
         navButton();
         showData();
+        search();
        
         SRComboBox();
         showResponseRecord();
@@ -385,9 +657,9 @@ public class dashboardController implements Initializable {
             data_page.setVisible(false);
             
 //            TO SEE IMMIDIATELY THE RECORD!
-            //totalStudent();
-           // totalGraduated();
-            //totalEnrolled();
+            totalStudent();
+            totalGraduated();
+            totalEnrolled();
             //totalInactive();
             
             nav_chart.setVisible(false);
@@ -507,6 +779,15 @@ public class dashboardController implements Initializable {
                 
                  clear();
                  showData();
+                 
+                 String messageText = "Votre reclamation  a été ajouté avec succès !";
+                 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message message = Message.creator(
+                new PhoneNumber(TO_PHONE_NUMBER),
+                new PhoneNumber(FROM_PHONE_NUMBER),
+               messageText
+        ).create();
+        System.out.println(message.getSid());
                
                
                }
@@ -711,6 +992,7 @@ public class dashboardController implements Initializable {
         
     }
      
+     
 
     private void selectData(MouseEvent event) {
         selectData();
@@ -738,8 +1020,51 @@ public class dashboardController implements Initializable {
 
     @FXML
     private void print(ActionEvent event) {
+         FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save PDF");
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+    File file = fileChooser.showSaveDialog(new Stage());
+
+    if (file != null) {
+        try {
+            // Create a new PDF document
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+            // Create a PDPageContentStream to write content to the PDF
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Get a snapshot of the TableView as an image
+           
+            TableView<Reclamation> tableView = table_view; // Replace "yourTableView" with your actual TableView variable
+            
+            WritableImage snapshot = tableView.snapshot(new SnapshotParameters(), null);
+
+            // Convert the image to a BufferedImage
+            java.awt.image.BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
+
+            // Write the image to the PDF
+           /* PDRectangle pageSize = page.getMediaBox();
+            float scale = Math.min(pageSize.getWidth() / image.getWidth(), pageSize.getHeight() / image.getHeight());
+            float x = (pageSize.getWidth() - image.getWidth() * scale) / 2;
+            float y = (pageSize.getHeight() - image.getHeight() * scale) / 2;
+            contentStream.drawImage(SwingFXUtils.fromFXImage(snapshot, null), x, y, image.getWidth() * scale, image.getHeight() * scale);*/
+
+            // Close the content stream and save the PDF document
+            contentStream.close();
+            document.save(file);
+
+            // Close the PDF document
+            document.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        
         
     }
+    
     
     private void SRFieldDesign(MouseEvent event) {
         SRFieldDesign();
@@ -820,6 +1145,27 @@ public class dashboardController implements Initializable {
 
     @FXML
     private void showChart(ActionEvent event) {
+        XYChart.Series<Integer, Integer> chart = new XYChart.Series<>();
+    chart.getData().add(new XYChart.Data<>(10, 1));  // Use a number value instead of a string
+    chart.getData().add(new XYChart.Data<>(5, 2));   // Use a number value instead of a string
+     if(line_chart_page.isVisible()){
+                
+                lineChart.getData().add(chart);
+                
+            }else if(bar_chart_page.isVisible()){
+                
+                barChart.getData().add(chart);
+                
+            }else if(area_chart_page.isVisible()){
+                
+                areaChart.getData().add(chart);
+                
+            }
+
+   
+        
+        
+        
     }
 
     private void navigationChartButton(ActionEvent event) {
@@ -832,6 +1178,7 @@ public class dashboardController implements Initializable {
 
     @FXML
     private void InsertResponse(ActionEvent event) {
+        ReclamationC rc=new ReclamationC();
         ResponseC rep=new ResponseC();
          if(description1.getText().isEmpty() | sr_current.getSelectionModel().isEmpty())
                     
@@ -858,12 +1205,17 @@ public class dashboardController implements Initializable {
              
              
              String Description=description1.getText();
+             String filteredDescription=filterInput(Description);
+             
              
              Reclamation reclamations=(Reclamation)sr_current.getSelectionModel().getSelectedItem();
              System.out.println(reclamations);
+             reclamations.setStatus(1);
+             rc.modifier(reclamations);
+             System.out.println(reclamations);
             
                      
-             Response reponse=new Response(Description,reclamations);
+             Response reponse=new Response(filteredDescription,reclamations);
               System.out.println(response);
               
              
@@ -931,6 +1283,8 @@ public class dashboardController implements Initializable {
         }
         
     }
+    
+    
     
     
 }

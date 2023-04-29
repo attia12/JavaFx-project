@@ -61,7 +61,7 @@ public class ReclamationC implements IService<Reclamation> {
     @Override
     public void modifier(Reclamation r) {
        try {
-           String req = "UPDATE `reclamation` SET `nom` = '" + r.getNom() + "', `prenom` = '" + r.getPrenom() + "',`email`='"+ r.getEmail() + "',`description`='"+ r.getDescription()+"' WHERE `reclamation`.`id` = " + r.getId();
+           String req = "UPDATE `reclamation` SET `nom` = '" + r.getNom() + "', `prenom` = '" + r.getPrenom() + "',`email`='"+ r.getEmail() + "',`status`='"+ r.getStatus()+ "',`description`='"+ r.getDescription()+"' WHERE `reclamation`.`id` = " + r.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Reclamation updated !");
@@ -116,6 +116,9 @@ public class ReclamationC implements IService<Reclamation> {
         
         //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+   
     
     
 

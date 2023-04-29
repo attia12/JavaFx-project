@@ -213,7 +213,7 @@
             <Button fx:id="update" layoutX="123.0" layoutY="460.0" mnemonicParsing="false" onAction="#update" prefHeight="43.0" prefWidth="93.0" styleClass="update-button" stylesheets="@dashboardDesign.css" text="Update" />
             <Button fx:id="clear" layoutX="225.0" layoutY="460.0" mnemonicParsing="false" onAction="#clear" prefHeight="43.0" prefWidth="93.0" styleClass="clear-button" stylesheets="@dashboardDesign.css" text="Clear" />
             <Button fx:id="delete" layoutX="225.0" layoutY="511.0" mnemonicParsing="false" onAction="#delete" prefHeight="43.0" prefWidth="93.0" styleClass="delete-button" stylesheets="@dashboardDesign.css" text="Delete" />
-            <TableView fx:id="table_view" layoutX="359.0" layoutY="166.0" onMouseClicked="#selectData" prefHeight="390.0" prefWidth="441.0">
+            <TableView fx:id="table_view" layoutX="359.0" layoutY="196.0" onMouseClicked="#selectData" prefHeight="360.0" prefWidth="441.0">
               <columns>
                 <TableColumn fx:id="col_nom" prefWidth="75.0" text="Nom" />
                 <TableColumn fx:id="col_prenom" prefWidth="75.0" text="Prenom" />
@@ -228,6 +228,7 @@
                   <Font size="15.0" />
                </font>
             </TextField>
+            <TextField fx:id="filterfield" layoutX="493.0" layoutY="157.0" promptText="Search" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="record_page" layoutX="190.0" layoutY="30.0" prefHeight="570.0" prefWidth="811.0" visible="false">
