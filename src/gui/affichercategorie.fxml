@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="911.0" prefWidth="1313.0" style="-fx-background-color: #FFDAB9;" stylesheets="@fullpackstyling.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AffichercategorieController">
+   <children>
+      <TableView fx:id="tablecategorie" layoutX="76.0" layoutY="551.0" onMouseClicked="#choisircategorie" prefHeight="318.0" prefWidth="680.0">
+        <columns>
+          <TableColumn fx:id="iduserTv" prefWidth="191.0" text="id utilisateur" />
+          <TableColumn fx:id="idmedicTv" prefWidth="238.0" text="id medicament" />
+            <TableColumn fx:id="datePartTv" prefWidth="233.0" text="date categorie" />
+        </columns>
+      </TableView>
+      <Button fx:id="modifierPartBtn" layoutX="1039.0" layoutY="704.0" mnemonicParsing="false" onAction="#modifiercategorie" prefHeight="59.0" prefWidth="201.0" style="-fx-background-radius: 30;" text="modifier categorie" textFill="#f05c00" />
+      <Button fx:id="supprimerPartBtn" layoutX="1039.0" layoutY="801.0" mnemonicParsing="false" onAction="#supprimercategorie" prefHeight="59.0" prefWidth="201.0" style="-fx-background-radius: 30;" text="supprimer categorie" textFill="#ff4400">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
+      <TextField fx:id="idread" layoutX="778.0" layoutY="551.0" prefHeight="45.0" prefWidth="214.0" promptText="Id Promo" />
+      <TextField fx:id="iduserField" layoutX="778.0" layoutY="621.0" prefHeight="45.0" prefWidth="214.0" promptText="Id Utilisateur" />
+      <TextField fx:id="idmedicField" layoutX="778.0" layoutY="688.0" prefHeight="45.0" prefWidth="214.0" promptText="Id medicament" />
+      <TextField fx:id="datepartField1" layoutX="778.0" layoutY="756.0" prefHeight="45.0" prefWidth="214.0" promptText="Date Promo" />
+      <DatePicker fx:id="datepartField" layoutX="778.0" layoutY="823.0" prefHeight="45.0" prefWidth="221.0" promptText="entrer le date" />
+      <Label layoutX="363.0" layoutY="44.0" prefHeight="60.0" prefWidth="424.0" text="AFFICHER categorie">
+         <font>
+            <Font name="Calisto MT Bold" size="28.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop color="#8a8a8ae8" />
+                  <Stop color="#ff1600" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="ajouter" layoutX="25.0" layoutY="75.0" mnemonicParsing="false" onAction="#ajoutermedicament" prefHeight="59.0" prefWidth="201.0" style="-fx-background-radius: 30;" text="ajouter medicament" textFill="#ff4400">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <TextField fx:id="cherchermedicField" layoutX="1031.0" layoutY="574.0" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#recherchermedicament" prefHeight="57.0" prefWidth="246.0" promptText="donner le nom d'medicament" style="-fx-background-radius: 30;" />
+   </children>
+</AnchorPane>
